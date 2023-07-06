@@ -29,7 +29,7 @@ pipeline{
                sh 'printenv'
                sh 'mvn -v'
                //打包
-               sh 'mvn clean package  -s '/var/jenkins_home/appconfig/maven/settings.xml' -Dmaven.test.skip=true'
+               sh 'mvn clean package  -s "/var/jenkins_home/appconfig/maven/settings.xml" -Dmaven.test.skip=true'
             }
         }
         stage('测试'){
