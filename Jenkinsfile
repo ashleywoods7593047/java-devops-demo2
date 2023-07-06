@@ -1,16 +1,24 @@
 pipeline{
     agent any
+    
+    environment {
+      hello = "123456"
+      world = "456789"
+    }
+    
     stages{
         
         stage('编译'){
             steps{
                echo "编译..........."
+               echo "${hello}"
             }
         }
         stage('测试'){
                 steps{
-                           echo "测试........."
-                        }
+                   echo "测试........."
+                   echo "${world}"
+                }
         }
         stage('打包'){
                 steps{
