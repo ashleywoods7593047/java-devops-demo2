@@ -20,9 +20,7 @@ pipeline{
         }
         stage('编译'){
             agent {
-                docker {
-                image 'maven:3-alpine'
-                }
+                docker 'maven:3-alpine'
               }
             steps{
                echo "编译..........."
@@ -30,6 +28,8 @@ pipeline{
                sh 'pwd && ls -alh'
                sh 'printenv'
                sh 'mvn -v'
+               //打包
+               sh 'mvn clean package -Dmaven.test.skip=true'
             }
         }
         stage('测试'){
@@ -41,7 +41,9 @@ pipeline{
         stage('打包'){
                 steps{
                            echo "打包........"
-                        }
+                    sh 'docker version' 
+                    sh 'pwd && ls -alh'       
+                }
         }
         stage('部署'){
                 steps{
