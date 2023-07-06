@@ -29,7 +29,7 @@ pipeline{
                sh 'printenv'
                sh 'mvn -v'
                //打包
-               sh 'mvn clean package -Dmaven.test.skip=true'
+               sh 'mvn clean package  -s '/var/jenkins_home/appconfig/maven/settings.xml' -Dmaven.test.skip=true'
             }
         }
         stage('测试'){
@@ -40,7 +40,7 @@ pipeline{
         }
         stage('打包'){
                 steps{
-                           echo "打包........"
+                    echo "打包........"
                     sh 'docker version' 
                     sh 'pwd && ls -alh'       
                 }
