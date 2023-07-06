@@ -13,17 +13,21 @@ pipeline{
                 echo '正在检查基本信息'
                 sh 'java -version'
                 sh 'git --version'
-                sh 'mvn -v'
+               
                 sh 'docker version'
                 echo '正在提交信息'
             }
         }
         stage('编译'){
+            agent{
+                  docker {image 'maven:3-alpine' }
+              }
             steps{
                echo "编译..........."
                echo "${hello}"
                sh 'pwd && ls -alh'
                sh 'printenv'
+               sh 'mvn -v'
             }
         }
         stage('测试'){
