@@ -24,6 +24,7 @@ pipeline{
                 image 'maven:3-alpine'
                 args  '-v /var/jenkins_home/appconfig/maven/.m2:/root/.m2'
                 }
+                
               }
             steps{
                echo "编译..........."
