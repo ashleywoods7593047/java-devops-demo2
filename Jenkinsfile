@@ -54,7 +54,8 @@ pipeline{
         stage('部署'){
                 steps{
                            echo "部署.............."
-                        }
+                    sh 'docker run -d -p 8888:8080 --name=java-devops-demo-dev java-devops-demo'          
+                 }
         }
     
     }
