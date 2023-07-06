@@ -15,6 +15,7 @@ pipeline{
                 sh 'git --version'
                 sh 'mvn -v'
                 sh 'docker version'
+                echo '正在提交信息'
             }
         }
         stage('编译'){
