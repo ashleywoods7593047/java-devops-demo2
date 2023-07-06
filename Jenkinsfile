@@ -5,6 +5,8 @@ pipeline{
       hello = "123456"
       world = "456789"
       ws="${WORKSPACE}"
+      ALIYUN_SECRTE=credentials("aliyun-docker-repo")
+      IMAGE_VERSION="v1.0"
     }
     
     stages{
@@ -67,6 +69,14 @@ pipeline{
                      echo "成功了"
                    }
                  }
+        }
+        
+        stage('推送镜像'){
+           steps{
+              sh "docker login -u=${ALIYUN_SECRTE_USR} -p=${ALIYUN_SECRTE_PSW} registry.cn-hangzhou.aliyuncs.com"
+              sh "docker tag java-devops-demo registry.cn-hangzhou.aliyuncs.com/ranjingnian_dev/java-devops-demo:${IMAGE_VERSION}"
+              sh "docker push registry.cn-hangzhou.aliyuncs.com/ranjingnian_dev/java-devops-demo:${IMAGE_VERSION}"
+           }
         }
         
         stage('发送报告'){
