@@ -20,7 +20,10 @@ pipeline{
         }
         stage('编译'){
             agent {
-                docker 'maven:3-alpine'
+                docker {
+                image 'maven:3-alpine'
+                args  '-v /var/jenkins_home/appconfig/maven/.m2:/root/.m2'
+                }
               }
             steps{
                echo "编译..........."
