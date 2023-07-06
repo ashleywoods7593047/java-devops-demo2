@@ -4,6 +4,7 @@ pipeline{
     environment {
       hello = "123456"
       world = "456789"
+      ws=${WORKSPACE}
     }
     
     stages{
@@ -33,7 +34,7 @@ pipeline{
                sh 'printenv'
                sh 'mvn -v'
                //打包
-               sh 'mvn clean package  -s "/var/jenkins_home/appconfig/maven/settings.xml" -Dmaven.test.skip=true'
+               sh 'cd ${ws} && mvn clean package  -s "/var/jenkins_home/appconfig/maven/settings.xml" -Dmaven.test.skip=true'
             }
         }
         stage('测试'){
