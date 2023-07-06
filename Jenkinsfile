@@ -8,6 +8,15 @@ pipeline{
     
     stages{
         
+        stage('检查基本环境'){
+            steps{
+                echo '正在检查基本信息'
+                sh 'java -version'
+                sh 'git --version'
+                sh 'mvn -v'
+                sh 'docker version'
+            }
+        }
         stage('编译'){
             steps{
                echo "编译..........."
