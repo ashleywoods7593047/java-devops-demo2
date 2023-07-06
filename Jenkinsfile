@@ -47,7 +47,8 @@ pipeline{
                 steps{
                     echo "打包........"
                     sh 'docker version' 
-                    sh 'pwd && ls -alh'       
+                    sh 'pwd && ls -alh'
+                    sh 'docker build  -t java-devops-demo .'    
                 }
         }
         stage('部署'){
