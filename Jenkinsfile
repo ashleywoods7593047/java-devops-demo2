@@ -75,16 +75,30 @@ pipeline{
         
         stage('推送镜像'){
            input {
-                  message '是否需要部署？'
-                  ok '需要'
-                  parameters {
-                    text defaultValue: 'v1.0', description: '生产环境需要部署的版本', name: 'APP_VERSION'
-                  }
-                }
+             message '是否需要部署？'
+             ok '需要'
+             parameters {
+               text defaultValue: 'v1.0', description: '生产环境需要部署的版本', name: 'APP_VERSION'
+               choice choices: ['wuhang', 'bj', 'cq'], description: '部署到某个地区', name: 'APP_ADDRESS'
+             }
+           }
+
+
            steps{
               sh "docker login -u=${ALIYUN_SECRTE_USR} -p=${ALIYUN_SECRTE_PSW} registry.cn-hangzhou.aliyuncs.com"
               sh "docker tag java-devops-demo registry.cn-hangzhou.aliyuncs.com/ranjingnian_dev/java-devops-demo:${APP_VERSION}"
               sh "docker push registry.cn-hangzhou.aliyuncs.com/ranjingnian_dev/java-devops-demo:${APP_VERSION}"
+              
+              script{
+                def where = "${APP_ADDRESS}"
+                if(where == "wuhang"){
+                   sh "echo 我在武行。。。。"
+                }else if (where == "bj"){
+                   sh "echo  我 在 北京。。。"
+                }else{
+                   sh "echo  我在重庆。。。"
+                }
+              }
            }
         }
         
