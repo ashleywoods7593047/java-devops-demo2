@@ -4,7 +4,7 @@ pipeline{
     environment {
       hello = "123456"
       world = "456789"
-      ws=${WORKSPACE}
+      ws="${WORKSPACE}"
     }
     
     stages{
