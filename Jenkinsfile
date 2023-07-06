@@ -134,5 +134,12 @@ pipeline{
                 ''', subject: '${ENV, var="JOB_NAME"}-第${BUILD_NUMBER}次构建日志', to: '16623135334@163.com'
             }
         }
+        
+        
+        stage('部署到生产环境'){
+            steps{
+                input message: '需要部署到生产环境吗？', ok: '需要', parameters: [text(defaultValue: 'v1.0', description: '生产环境需要部署的版本', name: 'IMAGE_VERSION')]
+            }
+        }
     }
 }
