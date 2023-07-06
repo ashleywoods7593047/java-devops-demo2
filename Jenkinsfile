@@ -70,13 +70,20 @@ pipeline{
                    }
                  }
         }
+
+        input {
+          message '是否需要部署？'
+          ok '需要'
+          parameters {
+            text defaultValue: 'v1.0', description: '生产环境需要部署的版本', name: 'APP_VERSION'
+          }
+        }
         
         stage('推送镜像'){
            steps{
-              input message: '需要部署到生产环境吗？', ok: '需要', parameters: [text(defaultValue: 'v1.0', description: '生产环境需要部署的版本', name: 'IMAGE_VERSION')]
               sh "docker login -u=${ALIYUN_SECRTE_USR} -p=${ALIYUN_SECRTE_PSW} registry.cn-hangzhou.aliyuncs.com"
-              sh "docker tag java-devops-demo registry.cn-hangzhou.aliyuncs.com/ranjingnian_dev/java-devops-demo:${IMAGE_VERSION}"
-              sh "docker push registry.cn-hangzhou.aliyuncs.com/ranjingnian_dev/java-devops-demo:${IMAGE_VERSION}"
+              sh "docker tag java-devops-demo registry.cn-hangzhou.aliyuncs.com/ranjingnian_dev/java-devops-demo:${APP_VERSION}"
+              sh "docker push registry.cn-hangzhou.aliyuncs.com/ranjingnian_dev/java-devops-demo:${APP_VERSION}"
            }
         }
         
