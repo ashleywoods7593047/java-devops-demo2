@@ -19,15 +19,15 @@ pipeline{
             }
         }
         stage('编译'){
-            agent {
-                docker {image 'maven:3-alpine' }
-              }
+//             agent {
+//                 docker {image 'maven:3-alpine' }
+//               }
             steps{
                echo "编译..........."
                echo "${hello}"
                sh 'pwd && ls -alh'
                sh 'printenv'
-               sh 'mvn -v'
+//                sh 'mvn -v'
             }
         }
         stage('测试'){
