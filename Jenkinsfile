@@ -120,7 +120,7 @@ pipeline{
                        </tr>    
                    </table>    
                </body>
-               ''', subject: '${ENV, var="JOB_NAME"}-第${BUILD_NUMBER}次构建日志', to: '16623135334@163.com'
+               ''', subject: '${ENV, var="JOB_NAME"}-第${BUILD_NUMBER}次构建日志', to: '1729253341@qq.com'
             }
         }
     }
